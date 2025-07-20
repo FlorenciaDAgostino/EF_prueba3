@@ -7,6 +7,7 @@ from .models import Familiar, Curso, Estudiante, Profesores, Televisores, Celula
 from.forms import CursoForm, EstudianteForm, ProfesoresForm, TelevisoresForm, CelularesForm, HeladerasForm, LavarropasForm
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 from django.http import HttpResponse
@@ -120,6 +121,8 @@ def buscar_cursos(request):
         nombre = request.GET.get('nombre', '')
         cursos = Curso.objects.filter(nombre__icontains=nombre)
         return render(request, 'mi_primer_app/cursos.html', {'cursos': cursos, 'nombre': nombre})
+
+#vistas basadas en clases
     
 class CelularesListView(ListView):
     model = Celulares
@@ -127,7 +130,7 @@ class CelularesListView(ListView):
     context_object_name = 'celulares'
 
 
-class CelularesCreateView(CreateView):
+class CelularesCreateView(LoginRequiredMixin, CreateView):
     model = Celulares
     form_class = CelularesForm
     template_name = 'mi_primer_app/crear_celulares.html'
@@ -138,15 +141,15 @@ class CelularesDetailView(DetailView):
     template_name = 'mi_primer_app/detalle_celulares.html'
     context_object_name = 'celulares'
 
-
-class CelularesUpdateView(UpdateView):
+  
+class CelularesUpdateView(LoginRequiredMixin, UpdateView):
     model = Celulares
     form_class = CelularesForm
     template_name = 'mi_primer_app/crear_celulares.html'
     success_url = reverse_lazy('listar-celulares') 
 
 
-class CelularesDeleteView(DeleteView):
+class CelularesDeleteView(LoginRequiredMixin, DeleteView):
     model = Celulares
     template_name = 'mi_primer_app/eliminar_celulares.html'
     success_url = reverse_lazy('listar-celulares')    
@@ -156,7 +159,7 @@ class HeladerasListView(ListView):
     template_name = 'mi_primer_app/listar_heladeras.html'
     context_object_name = 'heladeras'
 
-class HeladerasCreateView(CreateView):
+class HeladerasCreateView(LoginRequiredMixin, CreateView):
     model = Heladeras
     form_class = HeladerasForm
     template_name = 'mi_primer_app/crear_heladeras.html'
@@ -166,16 +169,14 @@ class HeladerasDetailView(DetailView):
     model = Heladeras
     template_name = 'mi_primer_app/detalle_heladeras.html'
     context_object_name = 'heladeras'
-
-
-class HeladerasUpdateView(UpdateView):
+ 
+class HeladerasUpdateView(LoginRequiredMixin, UpdateView):
     model = Heladeras
     form_class = HeladerasForm
     template_name = 'mi_primer_app/crear_heladeras.html'
     success_url = reverse_lazy('listar-heladeras') 
-
-
-class HeladerasDeleteView(DeleteView):
+  
+class HeladerasDeleteView(LoginRequiredMixin, DeleteView):
     model = Heladeras
     template_name = 'mi_primer_app/eliminar_heladeras.html'
     success_url = reverse_lazy('listar-heladeras')   
@@ -185,7 +186,7 @@ class LavarropasListView(ListView):
     template_name = 'mi_primer_app/listar_lavarropas.html'
     context_object_name = 'lavarropas'    
 
-class LavarropasCreateViews(CreateView):
+class LavarropasCreateViews(LoginRequiredMixin, CreateView):
     model = Lavarropas
     form_class = LavarropasForm
     template_name = 'mi_primer_app/crear_lavarropas.html'
@@ -197,14 +198,14 @@ class LavarropasDetailView(DetailView):
     context_object_name = 'lavarropas'
 
 
-class LavarropasUpdateView(UpdateView):
+class LavarropasUpdateView(LoginRequiredMixin, UpdateView):
     model = Lavarropas
     form_class = LavarropasForm
     template_name = 'mi_primer_app/crear_lavarropas.html'
     success_url = reverse_lazy('listar-lavarropas') 
 
 
-class LavarropasDeleteView(DeleteView):
+class LavarropasDeleteView(LoginRequiredMixin, DeleteView):
     model = Lavarropas
     template_name = 'mi_primer_app/eliminar_lavarropas.html'
     success_url = reverse_lazy('listar-lavarropas')
