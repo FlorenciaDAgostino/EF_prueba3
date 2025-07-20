@@ -1,0 +1,19 @@
+{% extends "padre.html" %}
+
+{% block content %}
+
+<h2>Lista de Heladeras</h2>
+
+<ul>
+    {% for heladeras in heladeras %}
+        <li>
+         {{ heladeras.modelo }}
+        <a href="{% url 'detalle-heladeras' heladeras.pk %}">Ver Detalle</a>
+        <a href="{% url 'editar-heladeras' heladeras.pk %}">Editar</a>
+        <a href="{% url 'eliminar-heladeras' heladeras.pk %}">Eliminar</a>
+        </li>
+    {% empty %}
+        <li>No hay heladeras disponibles.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

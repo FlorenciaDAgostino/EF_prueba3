@@ -1,0 +1,19 @@
+{% extends "padre.html" %}
+
+{% block content %}
+
+<h2>Lista de Lavarropas</h2>
+
+<ul>
+    {% for lavarropas in lavarropas %}
+        <li>
+         {{ lavarropas.modelo }}
+        <a href="{% url 'detalle-lavarropas' lavarropas.pk %}">Ver Detalle</a>
+        <a href="{% url 'editar-lavarropas' lavarropas.pk %}">Editar</a>
+        <a href="{% url 'eliminar-lavarropas' lavarropas.pk %}">Eliminar</a>
+        </li>
+    {% empty %}
+        <li>No hay lavarropas disponibles.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
