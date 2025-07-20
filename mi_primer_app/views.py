@@ -6,6 +6,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from .models import Familiar, Curso, Estudiante, Profesores, Televisores, Celulares, Heladeras, Lavarropas
 from.forms import CursoForm, EstudianteForm, ProfesoresForm, TelevisoresForm, CelularesForm, HeladerasForm, LavarropasForm
 
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 from django.http import HttpResponse
 
@@ -90,7 +92,8 @@ def crear_profesores(request):
     else:
         form = ProfesoresForm()
         return render(request, 'mi_primer_app/crear_profesores.html', {'form': form})
-    
+
+@login_required   
 def crear_televisores(request):
 
     if request.method == 'POST':
