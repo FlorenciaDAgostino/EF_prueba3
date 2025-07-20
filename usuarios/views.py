@@ -28,3 +28,15 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         return reverse_lazy('inicio')
+    
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy('login')
+
+
+class ProfileView(DetailView):
+    model = User
+    template_name = 'usuarios/profile.html'
+    context_object_name = 'user'
+
+    def get_object(self):
+        return self.request.user
