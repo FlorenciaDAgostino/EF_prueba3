@@ -45,3 +45,5 @@ class LavarropasForm(forms.ModelForm):
     class Meta:
         model = Lavarropas
         fields = ['modelo', 'marca', 'descripcion']   
+
+

@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 
-from .models import Familiar, Curso, Estudiante, Profesores, Televisores, Celulares, Heladeras, Lavarropas
+from .models import Familiar, Curso, Estudiante, Profesores, Televisores, Celulares, Heladeras, Lavarropas, About
 from.forms import CursoForm, EstudianteForm, ProfesoresForm, TelevisoresForm, CelularesForm, HeladerasForm, LavarropasForm
 
 from django.contrib.auth.decorators import login_required
@@ -116,6 +116,10 @@ def cursos(request):
     cursos = Curso.objects.all()
     return render(request, 'mi_primer_app/cursos.html', {'cursos': cursos})
 
+def about(request):
+    about = About.objects.all()
+    return render(request, 'mi_primer_app/about.html', {'about': about})
+
 def buscar_cursos(request):
     if request.method == 'GET':
         nombre = request.GET.get('nombre', '')
@@ -209,3 +213,5 @@ class LavarropasDeleteView(LoginRequiredMixin, DeleteView):
     model = Lavarropas
     template_name = 'mi_primer_app/eliminar_lavarropas.html'
     success_url = reverse_lazy('listar-lavarropas')
+
+

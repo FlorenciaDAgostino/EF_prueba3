@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import (saludo, saludo_con_template, crear_familiar,
-                    inicio, crear_curso, crear_estudiante, buscar_cursos, cursos, crear_profesores, crear_televisores,
+                    inicio, crear_curso, crear_estudiante, buscar_cursos, cursos, crear_profesores, crear_televisores, about,
                     CelularesCreateView, CelularesListView, CelularesDeleteView, CelularesDetailView, CelularesUpdateView, HeladerasCreateView, HeladerasListView, HeladerasDeleteView, HeladerasDetailView, HeladerasUpdateView, LavarropasCreateViews,LavarropasListView, LavarropasDeleteView, LavarropasDetailView, LavarropasUpdateView)
 
 urlpatterns = [
@@ -15,6 +15,8 @@ urlpatterns = [
     path('crear-televisores/', crear_televisores, name= 'crear-televisores'),
     path('cursos/', cursos, name='cursos'),
     path('cursos/buscar', buscar_cursos, name='buscar-cursos'),
+    path('about/', about, name='about'),
+
 
     # urls con vistas basadas en clase
     path('listar-celulares/', CelularesListView.as_view(), name= 'listar-celulares'),
